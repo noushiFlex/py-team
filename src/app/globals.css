@@ -1,26 +1,301 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes loading {
+  0% {
+    width: 0%;
+    margin-left: 0;
+  }
+  50% {
+    width: 100%;
+    margin-left: 0;
+  }
+  100% {
+    width: 0%;
+    margin-left: 100%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Team name float animation */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Python text shadow effect */
+.py-text-shadow {
+  text-shadow: 0 0 40px rgba(99, 102, 241, 0.3), 
+               0 0 20px rgba(139, 92, 246, 0.3), 
+               0 0 60px rgba(99, 102, 241, 0.2);
+}
+
+/* Glitch text effect */
+.glitch-container {
+  position: relative;
+}
+
+.glitch-text {
+  position: relative;
+  color: white;
+  animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(36px, 9999px, 9px, 0);
+    transform: skew(0.4deg);
+  }
+  20% {
+    clip: rect(39px, 9999px, 77px, 0);
+    transform: skew(0.9deg);
+  }
+  40% {
+    clip: rect(94px, 9999px, 34px, 0);
+    transform: skew(0.1deg);
+  }
+  60% {
+    clip: rect(10px, 9999px, 89px, 0);
+    transform: skew(0.2deg);
+  }
+  80% {
+    clip: rect(66px, 9999px, 92px, 0);
+    transform: skew(0.5deg);
+  }
+  100% {
+    clip: rect(11px, 9999px, 35px, 0);
+    transform: skew(0.1deg);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(96px, 9999px, 78px, 0);
+    transform: skew(0.4deg);
+  }
+  20% {
+    clip: rect(82px, 9999px, 15px, 0);
+    transform: skew(0.3deg);
+  }
+  40% {
+    clip: rect(51px, 9999px, 36px, 0);
+    transform: skew(0.8deg);
+  }
+  60% {
+    clip: rect(89px, 9999px, 15px, 0);
+    transform: skew(0.1deg);
+  }
+  80% {
+    clip: rect(76px, 9999px, 71px, 0);
+    transform: skew(0.7deg);
+  }
+  100% {
+    clip: rect(67px, 9999px, 53px, 0);
+    transform: skew(0.2deg);
+  }
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skew(-0.2deg);
+  }
+  20% {
+    transform: skew(0.4deg);
+  }
+  40% {
+    transform: skew(-0.1deg);
+  }
+  60% {
+    transform: skew(0.3deg);
+  }
+  80% {
+    transform: skew(0.2deg);
+  }
+  100% {
+    transform: skew(-0.1deg);
+  }
+}
+
+/* Hexagon profile style */
+.hexagon-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.hexagon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  z-index: 10;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.hexagon:hover {
+  transform: scale(1.05);
+}
+
+.hexagon-outer {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+  z-index: 5;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Custom spin animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slow-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 12s linear infinite;
+}
+
+/* Glow effects */
+.hover\:shadow-glow-blue:hover {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5), 0 0 30px rgba(59, 130, 246, 0.3);
+}
+
+.hover\:shadow-glow-purple:hover {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.5), 0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+/* Background particles */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.particle-0 {
+  width: 10px;
+  height: 10px;
+  left: 10%;
+  animation: float-particle 15s infinite linear;
+}
+
+.particle-1 {
+  width: 15px;
+  height: 15px;
+  left: 20%;
+  animation: float-particle 20s infinite linear 2s;
+}
+
+.particle-2 {
+  width: 7px;
+  height: 7px;
+  left: 50%;
+  animation: float-particle 25s infinite linear 5s;
+}
+
+.particle-3 {
+  width: 12px;
+  height: 12px;
+  left: 70%;
+  animation: float-particle 18s infinite linear 4s;
+}
+
+.particle-4 {
+  width: 5px;
+  height: 5px;
+  left: 85%;
+  animation: float-particle 22s infinite linear 3s;
+}
+

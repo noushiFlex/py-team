@@ -1,103 +1,130 @@
+"use client";
+
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-black text-white">
+      {/* Loading overlay */}
+      <div 
+        className={`fixed inset-0 bg-black z-50 flex flex-col items-center justify-center transition-transform duration-1500 ease-in-out ${
+          loading ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <div className="text-center">
+          <div className="mb-6 glitch-container">
+            <h1 className="text-6xl font-bold glitch-text" data-text=".py">.py</h1>
+          </div>
+          <div className="w-64 h-2 bg-gray-800 rounded-full mx-auto overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400 animate-[loading_2.5s_ease-in-out_infinite]"></div>
+          </div>
+          <p className="mt-4 text-gray-400 text-sm tracking-widest uppercase">Initializing Code Excellence</p>
+        </div>
+      </div>
+
+      {/* Central team name */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none">
+        <div className={`transition-all duration-1000 delay-500 ${loading ? "opacity-0 scale-50" : "opacity-90 scale-100"}`}>
+          <h1 className="text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 py-text-shadow animate-float">
+            .py
+          </h1>
+          <p className="text-center text-xl text-white/70 tracking-widest mt-2">Paul × Yohann</p>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <main className="min-h-screen">
+        <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+          {/* First team member section */}
+          <div className={`bg-gradient-to-br from-blue-900/80 to-blue-700/80 backdrop-blur-sm p-10 flex flex-col items-center justify-center transition-all duration-1000 ${loading ? "opacity-0 translate-x-[-100px]" : "opacity-100 translate-x-0"}`}>
+            <div className="max-w-md w-full relative z-10">
+              <div className="hexagon-container mx-auto mb-8">
+                <div className="hexagon">
+                  <Image
+                    src="/yohannpp.jpg"
+                    alt="Yohann"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="hexagon-outer animate-spin-slow"></div>
+              </div>
+              <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Yohann</h2>
+              <p className="text-blue-200 mb-3 text-center text-lg">Full-stack Developer & Designer</p>
+              <p className="text-sm text-blue-100/80 text-center mb-6">Crafting beautiful interfaces with pixel-perfect precision and performance-driven code.</p>
+              <div className="flex justify-center space-x-4">
+                <a 
+                  href="#" 
+                  className="bg-white/10 backdrop-blur-sm text-white border border-white/20 px-6 py-2 rounded-full font-medium hover:bg-white hover:text-blue-900 transition-all hover:shadow-glow-blue transform hover:-translate-y-1"
+                >
+                  Portfolio
+                </a>
+                <a 
+                  href="#" 
+                  className="bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 px-6 py-2 rounded-full font-medium hover:bg-blue-500 hover:border-blue-500 transition-all hover:shadow-glow-blue transform hover:-translate-y-1"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+          </div>
+          
+          {/* Second team member section */}
+          <div className={`bg-gradient-to-bl from-purple-900/80 to-purple-700/80 backdrop-blur-sm p-10 flex flex-col items-center justify-center transition-all duration-1000 delay-300 ${loading ? "opacity-0 translate-x-[100px]" : "opacity-100 translate-x-0"}`}>
+            <div className="max-w-md w-full relative z-10">
+              <div className="hexagon-container mx-auto mb-8">
+                <div className="hexagon">
+                  <Image
+                    src="/next.svg"
+                    alt="Paul"
+                    fill
+                    className="object-cover bg-white p-4"
+                  />
+                </div>
+                <div className="hexagon-outer animate-spin-slow-reverse"></div>
+              </div>
+              <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">Paul</h2>
+              <p className="text-purple-200 mb-3 text-center text-lg">Backend Developer & AI Specialist</p>
+              <p className="text-sm text-purple-100/80 text-center mb-6">Developing intelligent solutions and rock-solid backend systems that scale without compromise.</p>
+              <div className="flex justify-center space-x-4">
+                <a 
+                  href="#" 
+                  className="bg-white/10 backdrop-blur-sm text-white border border-white/20 px-6 py-2 rounded-full font-medium hover:bg-white hover:text-purple-900 transition-all hover:shadow-glow-purple transform hover:-translate-y-1"
+                >
+                  Portfolio
+                </a>
+                <a 
+                  href="#" 
+                  className="bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 px-6 py-2 rounded-full font-medium hover:bg-purple-500 hover:border-purple-500 transition-all hover:shadow-glow-purple transform hover:-translate-y-1"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+            <div className="absolute bottom-0 right-0 w-full h-64 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      
+      {/* Animated background particles */}
+      <div className="particles-container">
+        {[...Array(20)].map((_, i) => (
+          <div key={i} className={`particle particle-${i % 5}`}></div>
+        ))}
+      </div>
     </div>
   );
 }
