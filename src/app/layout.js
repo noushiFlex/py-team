@@ -1,9 +1,10 @@
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 
-
 const brico = Bricolage_Grotesque({
-
+  subsets: ["latin"],  // Required to specify which character set to use
+  display: "swap",     // Improves performance by allowing text to display in a fallback font while loading
+  weight: ["400", "500", "600", "700"], // Include the weights you need
 });
 
 export const metadata = {
@@ -53,9 +54,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={brico.className }
-      >
+      <body className={brico.className}>
         {children}
       </body>
     </html>
